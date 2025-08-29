@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:rest_api/methods/api_methods.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class PostScreen extends StatefulWidget {
+  const PostScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<PostScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("POSTS"), centerTitle: true),
+      appBar: AppBar(title: Text("POSTS API HIT"), centerTitle: true),
       body: FutureBuilder(
         future: getPostApi(),
         builder: (context, snapshot) {
@@ -20,10 +20,16 @@ class _HomeScreenState extends State<HomeScreen> {
             return Center(
               child: CircularProgressIndicator(color: Colors.black),
             );
+          } else if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text("No posts found"));
           } else {
+            final posts = snapshot.data!;
             return ListView.builder(
-              itemCount: snapshot.data!.length,
+              itemCount: posts.length,
               itemBuilder: (context, index) {
+                final post = posts[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 18.0,
@@ -50,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            postList[index].title,
+                            post.title,
                             style: TextStyle(color: Colors.black, fontSize: 14),
                           ),
                           SizedBox(height: 10),
@@ -63,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            postList[index].body,
+                            post.body,
                             style: TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ],
