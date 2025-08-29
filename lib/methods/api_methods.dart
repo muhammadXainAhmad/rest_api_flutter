@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:rest_api/Models/post_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:rest_api/models/photo_model.dart';
+import 'package:rest_api/models/user_model/user_model.dart';
 
 Future<List<PostModel>> getPostApi() async {
   final response = await http.get(
@@ -22,7 +23,7 @@ Future<List<PostModel>> getPostApi() async {
     }
     return postList;
   } else {
-    throw Exception("Failed to load post");
+    throw Exception("Failed to load post data");
   }
 }
 
@@ -38,6 +39,22 @@ Future<List<PhotoModel>> getPhotoAPI() async {
     }
     return photosList;
   } else {
-    throw Exception("Failed to load photos");
+    throw Exception("Failed to load photos data");
+  }
+}
+
+Future<List<UserModel>> getUserAPI() async {
+  final response = await http.get(
+    Uri.parse("https://jsonplaceholder.typicode.com/users"),
+  );
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    List<UserModel> userList = [];
+    for (Map<String, dynamic> i in data) {
+      userList.add(UserModel.fromJson(i));
+    }
+    return userList;
+  } else {
+    throw Exception("Failed to load user data");
   }
 }
