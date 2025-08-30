@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:rest_api/Models/post_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:rest_api/models/photo_model.dart';
+import 'package:rest_api/models/shop_model/shop_model.dart';
 import 'package:rest_api/models/user_model/user_model.dart';
 
 Future<List<PostModel>> getPostApi() async {
@@ -56,5 +57,17 @@ Future<List<UserModel>> getUserAPI() async {
     return userList;
   } else {
     throw Exception("Failed to load user data");
+  }
+}
+
+Future<ShopModel> getShopAPI() async {
+  final response = await http.get(
+    Uri.parse("https://webhook.site/453b912b-cbea-4430-8c51-c2afe3f4111c"),
+  );
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    return ShopModel.fromJson(data);
+  } else {
+    throw Exception("Failed to load shop data");
   }
 }

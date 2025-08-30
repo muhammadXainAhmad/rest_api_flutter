@@ -21,7 +21,7 @@ class _UserScreenState extends State<UserScreen> {
               child: CircularProgressIndicator(color: Colors.black),
             );
           } else if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
+            return Center(child: Text("ERROR: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text("No posts found"));
           } else {
@@ -104,7 +104,8 @@ class _UserScreenState extends State<UserScreen> {
                                 ),
                               ),
                             ],
-                          ),Row(
+                          ),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
