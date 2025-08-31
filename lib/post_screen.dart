@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rest_api/methods/api_methods.dart';
+import 'package:rest_api/methods/api_get_methods.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});
