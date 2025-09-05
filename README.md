@@ -1,7 +1,6 @@
 # 📱 Flutter REST API Learning Project
 
-This project is a **Flutter-based learning app** that demonstrates how to work with **REST APIs** using the `http` package.  
-It covers fetching data, authentication, and file uploads with proper error handling and JSON parsing.
+This project is a **Flutter-based learning app** that demonstrates how to work with **REST APIs** using the `http` package. It covers fetching data, authentication, and file uploads with proper error handling and JSON parsing.
 
 ---
 
@@ -49,8 +48,8 @@ This project uses the following dependencies:
 
 ### Clone and Run
 ```bash
-git clone https://github.com/yourusername/blogging_app_flutter.git
-cd blogging_app_flutter
+git clone https://github.com/muhammadXainAhmad/rest_api_flutter
+cd rest_api_flutter
 flutter pub get
 flutter run
 ```
